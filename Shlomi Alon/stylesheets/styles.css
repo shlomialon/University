@@ -1,0 +1,80 @@
+ 
+ /* Language Images */
+ .language-en {
+   position: relative;
+   display: inline-block;
+ }
+ .language-en:hover .language-he { display: block; }
+ 
+ .language-he {
+   display: none;
+   position: absolute;
+   min-width: 30px;
+ }
+ 
+ /* Image Circle View */
+ .img-circle {
+    border-radius: 60%;
+    border: 1px solid #021a40;
+    margin-top: 60px;
+    margin-bottom: 20px;
+  }
+  
+  /* Center text */
+  div {
+    text-align:  center;
+    font-family: sans-serif;
+  }
+  
+  table { margin: auto; }
+  
+  td { margin: 20px; }
+  
+  .button {
+    background-color: #FFFFFF;
+    border: 1px solid #4CAF50;;
+    color: #4CAF50;;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 20px 2px;
+    cursor: pointer;
+  }
+  .button:hover {
+    color: #008000;
+    border-color : #008000;
+  }
+  
+  /* Facebook Link */
+  #facebook {
+    background-image: url('Images/facebook.png');
+    width: 85px;
+    height: 85px;
+  }
+  #facebook:hover { background-image: url('Images/facebook_color.png'); }
+  
+   /* Github Link */
+  #github {
+    background-image: url('Images/github.png');
+    width: 85px;
+    height: 85px;
+  }
+  #github:hover { background-image: url('Images/github_color.png'); }
+  
+   /* Linkedin Link */
+  #linkedin {
+    background-image: url('Images/linkedin.png');
+    width: 85px;
+    height: 85px;
+  }
+  #linkedin:hover { background-image: url('Images/linkedin_color.png'); }
+  
+  /* Email Contact Link */
+  #email {
+    background-image: url('Images/mail.png');
+    width: 85px;
+    height: 85px;
+  }
+  #email:hover { background-image: url('Images/mail_color.png'); }
