@@ -5,7 +5,7 @@ public class Candy extends DessertItem {
 	int cents;
 
 	public Candy(String name, double lbs,int cents){
-		super();
+		super(name);
 		this.lbs = lbs;
 		this.cents = cents;
 	}
@@ -20,6 +20,10 @@ public class Candy extends DessertItem {
 
 	public int getCents() {
 		return cents;
+	}
+	
+	public double getCentsToString() {
+		return (cents/100.0);
 	}
 
 
