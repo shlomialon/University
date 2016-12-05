@@ -33,6 +33,11 @@ public class Cookie extends DessertItem{
 
 	public int getCost() {
 		double ans = (number/12.0)*price;
-		return (int)Math.round(ans);
+		int ansInt = (int)Math.round(ans);
+		String ansStr = "" + ans;
+		if(ansStr.length() < 6)
+			return ansInt;
+		else
+			return Integer.MIN_VALUE;
 	}	
 }

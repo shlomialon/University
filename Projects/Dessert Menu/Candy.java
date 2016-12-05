@@ -33,6 +33,11 @@ public class Candy extends DessertItem {
 
 	@Override
 	public int getCost() {
-		return (int) Math.round(this.lbs*this.cents);
+		int ans = (int) Math.round(this.lbs*this.cents);
+		String ansStr = "" + ans;
+		if(ansStr.length() < 6){
+			return ans;
+		}
+		return Integer.MIN_VALUE;
 	}	
 }
