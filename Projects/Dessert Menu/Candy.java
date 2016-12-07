@@ -35,7 +35,7 @@ public class Candy extends DessertItem {
 	public int getCost() {
 		int ans = (int) Math.round(this.lbs*this.cents);
 		String ansStr = "" + ans;
-		if(ansStr.length() < 6){
+		if(ansStr.length() <= 6){
 			return ans;
 		}
 		return Integer.MIN_VALUE;

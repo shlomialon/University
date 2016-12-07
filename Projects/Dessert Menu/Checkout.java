@@ -69,8 +69,8 @@ public class Checkout extends java.lang.Object {
 			str = str +  dessertItems.elementAt(i).name + CompletionEarningsStatement(dessertItems.elementAt(i).getName()) + DessertShoppe.cents2dollarsAndCents(dessertItems.elementAt(i).getCost()) + "\n";
 			i++;
 		}
-		str = str + "Tax" + "                         " + DessertShoppe.cents2dollarsAndCents(totalTax()) + "\n";
-		str = str + "Total Cost" + "                " + DessertShoppe.cents2dollarsAndCents(totalCost() + totalTax());
+		str = str + "Tax" + "                        " + DessertShoppe.cents2dollarsAndCents(totalTax()) + "\n";
+		str = str + "Total Cost" + "                 " + DessertShoppe.cents2dollarsAndCents(totalCost() + totalTax());
 		return str;
 	}
 }

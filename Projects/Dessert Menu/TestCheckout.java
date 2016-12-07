@@ -18,6 +18,17 @@ public class TestCheckout {
 		System.out.println("\nTotal tax: " + checkout.totalTax() + "\n");
 		System.out.println("\nCost + Tax: " + (checkout.totalCost() + checkout.totalTax()) + "\n");
 		System.out.println(checkout);
+		checkout.clear();
+		checkout.enterItem(new Candy("aaaaaaaaaaaaaaa", 4.3, 899));
+		checkout.enterItem(new IceCream("ccccccccccccc",378));
+		checkout.enterItem(new Sundae("c",145, "Hot Fudge", 45));
+		checkout.enterItem(new Cookie("ddddd", 2, 544));
+
+		System.out.println("\nNumber of items: " + checkout.numberOfItems() + "\n");
+		System.out.println("\nTotal cost: " + checkout.totalCost() + "\n");
+		System.out.println("\nTotal tax: " + checkout.totalTax() + "\n");
+		System.out.println("\nCost + Tax: " + (checkout.totalCost() + checkout.totalTax()) + "\n");
+		System.out.println(checkout);
 
 		checkout.clear();
 

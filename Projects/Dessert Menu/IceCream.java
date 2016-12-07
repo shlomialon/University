@@ -10,9 +10,9 @@ public class IceCream extends DessertItem{
 	
 	public int getCost() {
 		String ansStr = "" + cost;
-		if(ansStr.length() < 6)
+		if(ansStr.length() <= 6)
 			return cost;
 		else
-			return cost;
+			return 0;
 	}
 }
