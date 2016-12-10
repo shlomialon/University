@@ -1,10 +1,10 @@
-package myPack2;
+package myPack1;
 
 public class Ex1_AA {
     
-    public double bb(){
-        System.out.println("class Ex1_AA ;  package myPack2  ; method bb() ");
-        return 8.0;
+    public int aa(){
+        System.out.println("class Ex1_AA ;   package myPack1  ; method aa() ");
+        return 8;
     }
-}
 
+}
