@@ -1,7 +1,10 @@
 package PartB;
 
 /**
- * Created by Shlomi Alon on 19/12/2016.
+ * Created by Shlomi Alon on 21/12/2016.
  */
-public class SquareEquationException {
+public class SquareEquationException extends Exception {
+    public SquareEquationException(String msg) {
+        super(msg);
+    }
 }
