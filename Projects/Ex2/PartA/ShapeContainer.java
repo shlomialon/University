@@ -11,6 +11,7 @@ public class ShapeContainer {
     public Triangle[] triangleArr;
     private int rMone, tMone;
 
+
     public ShapeContainer() {
         rectangleArr = new Rectangle[INIT_SIZE];
         triangleArr = new Triangle[INIT_SIZE];
@@ -114,7 +115,6 @@ public class ShapeContainer {
                     }
                 }
             }
-
         }
     }
 
