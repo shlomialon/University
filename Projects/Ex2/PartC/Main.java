@@ -10,9 +10,9 @@ public class Main {
         list.add(6);
         list.add(7.8);
         System.out.println(list.toString());
-        System.out.println(list.contains(4));
+        list.remove(6);
+        System.out.println(list.toString());
         System.out.println(list.contains("Shlomi"));
-        System.out.println(list.contains(6));
-        System.out.println(list.contains(7.8));
+        System.out.println(list.isEmpty());
     }
 }
