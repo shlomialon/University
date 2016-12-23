@@ -62,6 +62,18 @@ public class Triangle implements Drawable{
         }
     }
 
+    public Point p1() {
+        return p1;
+    }
+
+    public Point p2() {
+        return p2;
+    }
+
+    public Point p3() {
+        return p3;
+    }
+
     public String toString() {
         //return "Name: " + this.getClass() + "[" + p1 + "," + p2 + "," + p3 + "]";
         return "2";

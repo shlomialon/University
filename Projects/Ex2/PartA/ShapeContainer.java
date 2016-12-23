@@ -18,27 +18,27 @@ public class ShapeContainer {
         rMone = tMone = 0;
     }
 
-    public ShapeContainer(ShapeContainer shapeContainer) {
-        rectangleArr = new Rectangle[shapeContainer.rectangleArr.length];
-        triangleArr = new Triangle[shapeContainer.triangleArr.length];
+    public ShapeContainer(ShapeContainer other) {
+        rectangleArr = new Rectangle[other.rectangleArr.length];
+        triangleArr = new Triangle[other.triangleArr.length];
 
         for (int i = 0; i < rectangleArr.length; i++) {
-            if (shapeContainer.rectangleArr[i] != null) {
-                rectangleArr[i] = new Rectangle(shapeContainer.rectangleArr[i]);
+            if (other.rectangleArr[i] != null) {
+                rectangleArr[i] = new Rectangle(other.rectangleArr[i]);
             } else {
                 rectangleArr[i] = null;
             }
         }
         for (int i = 0; i < triangleArr.length; i++) {
-            if (shapeContainer.triangleArr[i] != null) {
-                triangleArr[i] = new Triangle(shapeContainer.triangleArr[i]);
+            if (other.triangleArr[i] != null) {
+                triangleArr[i] = new Triangle(other.triangleArr[i]);
             } else {
                 triangleArr[i] = null;
             }
         }
 
-        rMone = shapeContainer.rMone;
-        tMone = shapeContainer.tMone;
+        rMone = other.rMone;
+        tMone = other.tMone;
     }
 
     public int T_size() {

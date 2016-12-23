@@ -7,7 +7,7 @@ public class Rectangle implements Drawable{
     Point p1;
     Point p2;
 
-    public Rectangle(Point p1,Point p2, Point p3){
+    public Rectangle(Point p1,Point p2){
         this.p1 = p1;
         this.p2 = p2;
     }
@@ -48,6 +48,22 @@ public class Rectangle implements Drawable{
             p1.translate(p);
             p2.translate(p);
         }
+    }
+
+    public double dx() {
+        return Math.abs(p2.get_x() - p1.get_x());
+    }
+
+    public double dy() {
+        return Math.abs(p2.get_y() - p1.get_y());
+    }
+
+    public Point p1() {
+        return p1;
+    }
+
+    public Point p2() {
+        return p2;
     }
 
     public String toString() {
