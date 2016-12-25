@@ -7,156 +7,137 @@ public class ShapeContainer {
     public static final int INIT_SIZE = 10;
     public static final int RESIZE = 10;
 
-    public Rectangle[] rectangleArr;
-    public Triangle[] triangleArr;
-    private int rMone, tMone;
-
+    public Drawable[] drawables;
+    private int size;
 
     public ShapeContainer() {
-        rectangleArr = new Rectangle[INIT_SIZE];
-        triangleArr = new Triangle[INIT_SIZE];
-        rMone = tMone = 0;
+        drawables = new Drawable[INIT_SIZE];
+        size = 0;
     }
 
     public ShapeContainer(ShapeContainer other) {
-        rectangleArr = new Rectangle[other.rectangleArr.length];
-        triangleArr = new Triangle[other.triangleArr.length];
 
-        for (int i = 0; i < rectangleArr.length; i++) {
-            if (other.rectangleArr[i] != null) {
-                rectangleArr[i] = new Rectangle(other.rectangleArr[i]);
-            } else {
-                rectangleArr[i] = null;
+        if (other == null) return;
+
+        drawables = new Drawable[other.drawables.length];
+
+        for (int i = 0; i < drawables.length; i++) {
+            if (other.drawables[i] != null) {
+                if (other.drawables[i] instanceof Rectangle) {
+                    drawables[i] = new Rectangle((Rectangle) other.drawables[i]);
+                    size++;
+                } else {
+                    drawables[i] = new Triangle((Triangle) other.drawables[i]);
+                    size++;
+                }
             }
         }
-        for (int i = 0; i < triangleArr.length; i++) {
-            if (other.triangleArr[i] != null) {
-                triangleArr[i] = new Triangle(other.triangleArr[i]);
-            } else {
-                triangleArr[i] = null;
-            }
-        }
-
-        rMone = other.rMone;
-        tMone = other.tMone;
     }
 
     public int T_size() {
+        int tMone = 0;
+        for (int i = 0; i < drawables.length ; i++) {
+            if(drawables[i] instanceof Triangle && drawables[i] != null)
+                tMone++;
+        }
         return tMone;
     }
 
     public int R_size() {
+        int rMone = 0;
+        for (int i = 0; i < drawables.length ; i++) {
+            if(drawables[i] instanceof Rectangle && drawables[i] != null)
+                rMone++;
+        }
         return rMone;
     }
 
     public int size() {
-        return T_size() + R_size();
+        return size;
     }
 
-    public void add(Rectangle r) {
-        if (r != null) {
-            if (rMone >= rectangleArr.length) {
-                R_resize();
+    public void add(Drawable d) {
+        if (d != null) {
+            if (d instanceof Rectangle) {
+                if (size() >= drawables.length) {
+                    R_resize();
+                }
+                drawables[size()] =  d;
+                size++;
             }
-            rectangleArr[rMone] = r;
-            rMone++;
-        }
-    }
-
-    public void add(Triangle t) {
-        if (t != null) {
-            if (tMone >= triangleArr.length) {
-                T_resize();
+            else{
+                if (size() >= drawables.length) {
+                    T_resize();
+                }
+                drawables[size()] = d;
+                size++;
             }
-            triangleArr[tMone] = t;
-            tMone++;
         }
     }
 
     private void R_resize() {
-        Rectangle[] arr = new Rectangle[rectangleArr.length + RESIZE];
-        System.arraycopy(rectangleArr, 0, arr, 0, R_size());
-        rectangleArr = arr;
+        Drawable[] arr = new Drawable[drawables.length + RESIZE];
+        System.arraycopy(drawables, 0, arr, 0, R_size());
+        drawables = arr;
     }
 
     private void T_resize() {
-        Triangle[] arr = new Triangle[triangleArr.length + RESIZE];
-        System.arraycopy(triangleArr, 0, arr, 0, T_size());
-        triangleArr = arr;
+        Drawable[] arr = new Drawable[drawables.length + RESIZE];
+        System.arraycopy(drawables, 0, arr, 0, T_size());
+        drawables = arr;
     }
 
     public void remove(Point p) {
         if (p != null) {
 
-            for (int i = 0; i < R_size(); i++) {
-                if (rectangleArr[i].contains(p)) {
-                    rectangleArr[i] = null;
-                    rMone--;
-                    i--;
-                    for (int j = i + 1; j < rectangleArr.length; j++) {
-                        if (rectangleArr[j] != null) {
-                            rectangleArr[j - 1] = rectangleArr[j];
-                            rectangleArr[j] = null;
+            for (int i = 0; i < size(); i++) {
+                if (drawables[i] != null){
+                    if (drawables[i].contains(p)) {
+                            size--;
+                        }
+                        for (int j = i; j < drawables.length-1; j++) {
+                            drawables[j] = drawables[j+1];
+                        }
+                            i--;
                         }
                     }
                 }
             }
-
-            for (int i = 0; i < T_size(); i++) {
-                if (triangleArr[i].contains(p)) {
-                    triangleArr[i] = null;
-                    tMone--;
-                    i--;
-                    for (int j = i + 1; j < triangleArr.length; j++) {
-                        if (triangleArr[j] != null) {
-                            triangleArr[j - 1] = triangleArr[j];
-                            triangleArr[j] = null;
-                        }
-                    }
-                }
-            }
-        }
-    }
 
     public Triangle T_at(int p) {
         Triangle t = null;
-        if (p < T_size()) {
-            t = new Triangle(triangleArr[p]);
+        if (p < size() && drawables[p] != null) {
+            if (drawables[p] instanceof Triangle) {
+                return t = (Triangle) drawables[p];
+            }
         }
-        return t;
+        return null;
     }
 
     public Rectangle R_at(int p) {
         Rectangle r = null;
-        if (p < R_size()) {
-            r = new Rectangle(rectangleArr[p]);
+        if (p < size() && drawables[p] != null) {
+            if (drawables[p] instanceof Rectangle) {
+               return r = ((Rectangle) drawables[p]);
+            }
         }
-        return r;
+        return null;
     }
 
     public double sumArea() {
         double sum = 0;
-        for (int i = 0; i < R_size(); i++) {
-            Rectangle rectangle = rectangleArr[i];
-            sum += rectangle.area();
-        }
-        for (int i = 0; i < T_size(); i++) {
-            Triangle triangle = triangleArr[i];
-            sum += triangle.area();
+        for (int i = 0; i < size(); i++) {
+            if(drawables[i] != null)
+            sum += drawables[i].area();
         }
         return sum;
     }
 
     public void translate(Point p) {
         if (p != null) {
-            for (int i = 0; i < R_size(); i++) {
-                Rectangle rectangle = rectangleArr[i];
-                rectangle.translate(p);
-            }
-
-            for (int i = 0; i < T_size(); i++) {
-                Triangle triangle = triangleArr[i];
-                triangle.translate(p);
+            for (int i = 0; i < size(); i++) {
+               if(drawables[i] !=null)
+                drawables[i].translate(p);
             }
         }
     }

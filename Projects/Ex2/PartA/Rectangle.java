@@ -18,6 +18,7 @@ public class Rectangle implements Drawable{
     }
     @Override
     public boolean equals(Drawable d) {
+
         return false;
     }
 

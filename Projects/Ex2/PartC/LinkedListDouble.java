@@ -74,7 +74,7 @@ public class LinkedListDouble<T> {
         return ans + tail.getData();
     }
 
-    public ListIterator<T> listIterator(){
+     public ListIterator<T> listIterator(){
         return new ListIterator<T>(){
             Node<T> current;
             Node<T> currentTail;
