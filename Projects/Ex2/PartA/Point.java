@@ -35,6 +35,9 @@ public class Point implements Drawable{
 
     @Override
     public boolean equals(Drawable d) {
+        if(d instanceof Point && d != null && _x == ((Point) d)._x && _y == ((Point) d)._y) {
+            return true;
+        }
         return false;
     }
 

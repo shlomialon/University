@@ -18,7 +18,8 @@ public class Rectangle implements Drawable{
     }
     @Override
     public boolean equals(Drawable d) {
-
+        if(d instanceof Rectangle && d !=null && ((Rectangle) d).p1 == p1 && ((Rectangle) d).p2 == p2)
+            return true;
         return false;
     }
 

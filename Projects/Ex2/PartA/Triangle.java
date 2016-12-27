@@ -23,6 +23,8 @@ public class Triangle implements Drawable{
 
     @Override
     public boolean equals(Drawable d) {
+        if(d instanceof Triangle && d != null && p1 == ((Triangle) d).p1 && p2 == ((Triangle) d).p2 && p3 == ((Triangle) d).p3)
+        return true;
         return false;
     }
 

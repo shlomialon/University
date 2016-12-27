@@ -25,18 +25,17 @@ public class ShapeContainer {
             if (other.drawables[i] != null) {
                 if (other.drawables[i] instanceof Rectangle) {
                     drawables[i] = new Rectangle((Rectangle) other.drawables[i]);
-                    size++;
                 } else {
                     drawables[i] = new Triangle((Triangle) other.drawables[i]);
-                    size++;
                 }
             }
         }
+        size = drawables.length;
     }
 
     public int T_size() {
         int tMone = 0;
-        for (int i = 0; i < drawables.length ; i++) {
+        for (int i = 0; i < size ; i++) {
             if(drawables[i] instanceof Triangle && drawables[i] != null)
                 tMone++;
         }
@@ -45,7 +44,7 @@ public class ShapeContainer {
 
     public int R_size() {
         int rMone = 0;
-        for (int i = 0; i < drawables.length ; i++) {
+        for (int i = 0; i < size ; i++) {
             if(drawables[i] instanceof Rectangle && drawables[i] != null)
                 rMone++;
         }
@@ -53,7 +52,7 @@ public class ShapeContainer {
     }
 
     public int size() {
-        return size;
+        return (T_size() + R_size());
     }
 
     public void add(Drawable d) {
@@ -90,7 +89,7 @@ public class ShapeContainer {
     public void remove(Point p) {
         if (p != null) {
 
-            for (int i = 0; i < size(); i++) {
+            for (int i = 0; i < size; i++) {
                 if (drawables[i] != null){
                     if (drawables[i].contains(p)) {
                             size--;
@@ -105,20 +104,18 @@ public class ShapeContainer {
             }
 
     public Triangle T_at(int p) {
-        Triangle t = null;
         if (p < size() && drawables[p] != null) {
             if (drawables[p] instanceof Triangle) {
-                return t = (Triangle) drawables[p];
+              return (Triangle) drawables[p];
             }
         }
         return null;
     }
 
     public Rectangle R_at(int p) {
-        Rectangle r = null;
         if (p < size() && drawables[p] != null) {
             if (drawables[p] instanceof Rectangle) {
-               return r = ((Rectangle) drawables[p]);
+               return ((Rectangle) drawables[p]);
             }
         }
         return null;
