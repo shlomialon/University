@@ -4,8 +4,8 @@ package PartA;
  * Created by Shlomi Alon on 19/12/2016.
  */
 public class Rectangle implements Drawable{
-    Point p1;
-    Point p2;
+    private Point p1;
+    private Point p2;
 
     public Rectangle(Point p1,Point p2){
         this.p1 = p1;
@@ -18,9 +18,7 @@ public class Rectangle implements Drawable{
     }
     @Override
     public boolean equals(Drawable d) {
-        if(d instanceof Rectangle && d !=null && ((Rectangle) d).p1 == p1 && ((Rectangle) d).p2 == p2)
-            return true;
-        return false;
+        return d instanceof Rectangle && ((Rectangle) d).p1 == p1 && ((Rectangle) d).p2 == p2;
     }
 
     @Override
@@ -52,19 +50,19 @@ public class Rectangle implements Drawable{
         }
     }
 
-    public double dx() {
+    double dx() {
         return Math.abs(p2.get_x() - p1.get_x());
     }
 
-    public double dy() {
+    double dy() {
         return Math.abs(p2.get_y() - p1.get_y());
     }
 
-    public Point p1() {
+    Point p1() {
         return p1;
     }
 
-    public Point p2() {
+    Point p2() {
         return p2;
     }
 

@@ -1,22 +1,23 @@
-package PartA; /**
+
+/**
  * Created by Shlomi Alon on 19/12/2016.
  */
+package PartA;
 
-public class ShapeContainer {
+class ShapeContainer {
 
-    public static final int INIT_SIZE = 10;
-    public static final int RESIZE = 10;
-    public Drawable[] drawables;
+    private static final int INIT_SIZE = 10;
+    private static final int RESIZE = 10;
+    private Drawable[] drawables;
     private int size;
 
-    public ShapeContainer() {
+    ShapeContainer() {
         drawables = new Drawable[INIT_SIZE];
         size = 0;
     }
 
-    public ShapeContainer(ShapeContainer other) {
+    ShapeContainer(ShapeContainer other) {
         drawables = new Drawable[other.drawables.length];
-        if (other == null) return;
         for (int i = 0; i < drawables.length; i++) {
             if (other.drawables[i] != null) {
                 if (other.drawables[i] instanceof Rectangle) {
@@ -29,7 +30,7 @@ public class ShapeContainer {
         }
     }
 
-    public int T_size() {
+    int T_size() {
         int tMone = 0;
         for (int i = 0; i < size ; i++) {
             if(drawables[i] instanceof Triangle && drawables[i] != null)
@@ -38,7 +39,7 @@ public class ShapeContainer {
         return tMone;
     }
 
-    public int R_size() {
+    int R_size() {
         int rMone = 0;
         for (int i = 0; i < size ; i++) {
             if(drawables[i] instanceof Rectangle && drawables[i] != null)
@@ -47,11 +48,11 @@ public class ShapeContainer {
         return rMone;
     }
 
-    public int size() {
+    int size() {
         return R_size() + T_size();
     }
 
-    public void add(Drawable d) {
+    void add(Drawable d) {
         if (d != null) {
             if (d instanceof Rectangle) {
                 if (size() >= drawables.length) {
@@ -72,19 +73,15 @@ public class ShapeContainer {
 
     private void resize() {
         Drawable temp[] = new Drawable[this.size + RESIZE];
-        for (int i = 0; i < this.size; i++) {
-            temp[i] = this.drawables[i];
-        }
+        System.arraycopy(this.drawables, 0, temp, 0, this.size);
         this.drawables = temp;
     }
 
-    public void remove(Point p) {
+    void remove(Point p) {
         if (p != null) {
             for (int i = 0; i < size; i++) {
                 if (drawables[i] != null && drawables[i].contains(p)){
-                        for (int j = i; j < drawables.length-1; j++) {
-                            drawables[j] = drawables[j+1];
-                        }
+                    System.arraycopy(drawables, i + 1, drawables, i, drawables.length - 1 - i);
                     this.drawables[size-1] = null;
                     this.size--;
                     i--;
@@ -93,7 +90,7 @@ public class ShapeContainer {
                 }
             }
 
-    public Triangle T_at(int p) {
+    Triangle T_at(int p) {
         int index = 0;
         if (p < size() && drawables[p] != null) {
             for (int i = 0; i < size; i++) {
@@ -108,7 +105,7 @@ public class ShapeContainer {
         return null;
     }
 
-    public Rectangle R_at(int p) {
+    Rectangle R_at(int p) {
         int index = 0;
         if (p < size() && drawables[p] != null) {
             for (int i = 0; i < size; i++) {
@@ -123,7 +120,7 @@ public class ShapeContainer {
         return null;
     }
 
-    public double sumArea() {
+    double sumArea() {
         double sum = 0;
         for (int i = 0; i < size(); i++) {
             if(drawables[i] instanceof Rectangle && drawables[i] != null){
@@ -137,7 +134,7 @@ public class ShapeContainer {
         return sum;
     }
 
-    public void translate(Point p) {
+    void translate(Point p) {
         if (p != null) {
             for (int i = 0; i < size(); i++) {
                if(drawables[i] !=null)

@@ -17,28 +17,16 @@ public class Point implements Drawable{
         this._y = p._y;
     }
 
-    public double get_x() {
+    double get_x() {
         return _x;
     }
 
-    public void set_x(double _x) {
-        this._x = _x;
-    }
-
-    public double get_y() {
+    double get_y() {
         return _y;
     }
 
-    public void set_y(double _y) {
-        this._y = _y;
-    }
-
-    @Override
     public boolean equals(Drawable d) {
-        if(d instanceof Point && d != null && _x == ((Point) d)._x && _y == ((Point) d)._y) {
-            return true;
-        }
-        return false;
+        return d instanceof Point && _x == ((Point) d)._x && _y == ((Point) d)._y;
     }
 
     @Override
@@ -66,7 +54,7 @@ public class Point implements Drawable{
         }
     }
 
-    public double distance(Point p) {
+    double distance(Point p) {
         if (p == null) {
             return 0;
         }
@@ -75,6 +63,7 @@ public class Point implements Drawable{
     }
 
     public String toString() {
-        return "name: " + this.getClass() + "[" + _x + "," + _y + "]";
+        //return "name: " + this.getClass() + "[" + _x + "," + _y + "]";
+        return "3";
     }
 }

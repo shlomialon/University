@@ -5,9 +5,9 @@ package PartA;
  */
 public class Triangle implements Drawable{
 
-    Point p1;
-    Point p2;
-    Point p3;
+    private Point p1;
+    private Point p2;
+    private Point p3;
 
     public Triangle(Point p1, Point p2, Point p3) {
         this.p1 = p1;
@@ -23,9 +23,7 @@ public class Triangle implements Drawable{
 
     @Override
     public boolean equals(Drawable d) {
-        if(d instanceof Triangle && d != null && p1 == ((Triangle) d).p1 && p2 == ((Triangle) d).p2 && p3 == ((Triangle) d).p3)
-        return true;
-        return false;
+        return d instanceof Triangle && p1 == ((Triangle) d).p1 && p2 == ((Triangle) d).p2 && p3 == ((Triangle) d).p3;
     }
 
     @Override
@@ -44,18 +42,15 @@ public class Triangle implements Drawable{
         return flag;
     }
 
-    @Override
     public double perimeter() {
         return  (p1.distance(p2) + p2.distance(p3) + p3.distance(p1));
     }
 
-    @Override
     public double area() {
         double D = perimeter() / 2;
         return Math.sqrt((D * (D - p1.distance(p2)) * (D - p2.distance(p3)) * (D - p1.distance(p3))));
     }
 
-    @Override
     public void translate(Point p) {
         if (p != null) {
             p1.translate(p);
@@ -64,15 +59,15 @@ public class Triangle implements Drawable{
         }
     }
 
-    public Point p1() {
+    Point p1() {
         return p1;
     }
 
-    public Point p2() {
+    Point p2() {
         return p2;
     }
 
-    public Point p3() {
+    Point p3() {
         return p3;
     }
 
