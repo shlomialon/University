@@ -1,39 +1,36 @@
-import com.sun.org.apache.xerces.internal.impl.dv.xs.TypeValidator;
-
 import java.util.ArrayList;
 
 /**
- * Created by Shlomi Alon on 26/12/2016.
+ * Created by Shlomi Alon on 30/12/2016.
  */
-public class Table extends Thread {
+public class Table extends Thread{
 
-    ArrayList<Player> players;
-    int num;
-    boolean isgame = false;
+    private ArrayList<Player> players;
+    private int num;
+    private boolean isGame = false;
 
-    public Table(int num){
-        players = new ArrayList<Player>();
-        for (int i = 0; i < num; i++) {
-            Player tmp = new Player( i + 1,"");
-            players.add(tmp);
+    Table(int num){
+        players = new ArrayList<>();
+        this.num = num;
+        for (int i = 0; i < num; i++){
+            Player p = new Player(i+1);
+            players.add(p);
         }
-        isgame = true;
+        isGame = true;
     }
 
     @Override
     public void run() {
         if (!players.isEmpty()) {
-            while (isgame) {
-                for (int i = 0; i < players.size(); i++) {
+            while(isGame){
+                for (int i = 0; i < num; i++) {
                     players.get(i).run();
                 }
             }
         }
     }
-
-    synchronized public void finishGame(){
-        isgame = false;
-        System.out.println("game over");
+        void finishGame(){
+        isGame = false;
         this.stop();
     }
 }
