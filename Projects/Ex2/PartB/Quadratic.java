@@ -50,9 +50,9 @@ public class Quadratic{
             System.out.println("x1= 0" + "," + "x2= " + (-b / a));
         } else if (a == 0 && b == 0 && c != 0) {
            throw new SquareEquationException("Error, No Answer!");
-        } else if ((a == 0 && c == 0 && b != 0) || (a != 0 && b == 0 && c == 0)) {
+        } else if (a == 0 && b != 0 || a != 0 && b == 0) {
             System.out.println("x1=,x2= 0");
-        } else if (a == 0 && c == 0 && b == 0) {
+        } else if (a == 0) {
             throw new SquareEquationException("x1 can be any number - trivial!");
         }
     } catch ( SquareEquationException e ) {

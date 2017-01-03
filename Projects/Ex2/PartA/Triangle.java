@@ -28,18 +28,16 @@ public class Triangle implements Drawable{
 
     @Override
     public boolean contains(Point p) {
-        boolean flag = false;
         if (p != null) {
             Triangle t1 = new Triangle(p1, p2, p);
             Triangle t2 = new Triangle(p1, p, p3);
             Triangle t3 = new Triangle(p, p2, p3);
             double sumTs = t1.area() + t2.area() + t3.area();
-            double sumT = area();
-            if (sumT >= sumTs - 0.001 && sumT <= sumTs + 0.001) {
-                flag = true;
+            if (sumTs == area()) {
+                return true;
             }
         }
-        return flag;
+        return false;
     }
 
     public double perimeter() {
@@ -47,8 +45,10 @@ public class Triangle implements Drawable{
     }
 
     public double area() {
-        double D = perimeter() / 2;
-        return Math.sqrt((D * (D - p1.distance(p2)) * (D - p2.distance(p3)) * (D - p1.distance(p3))));
+//        double D = perimeter() / 2;
+//        return Math.sqrt((D * (D - p1.distance(p2)) * (D - p2.distance(p3)) * (D - p1.distance(p3))));
+        return Math.abs((p1.get_x()*(p2.get_y()-p3.get_y()) + p2.get_x()*(p3.get_y()-p1.get_y())+ p3.get_x()*(p1.get_y()-p2.get_y()))/2.0);
+
     }
 
     public void translate(Point p) {

@@ -87,32 +87,41 @@ public class LinkedListDouble<T> {
                 indexPost = size;
             }
             @Override
-            public boolean hasNext() {return current != null;}
+            public boolean hasNext() {
+                return current != null;}
 
             @Override
             public boolean hasPrevious() {return currentTail != null;}
 
             @Override
             public T next() {
-                T tmp = current.getData();
-                if(!hasNext()) {return null;}
-                current = current.next;
-                return tmp;
+
+                if(hasNext()) {
+                    T tmp = current.getData();
+                    current = current.next;
+                    return tmp;
+                }
+                throw new NoSuchElementException();
             }
 
             @Override
             public T previous() {
-                T tmp = currentTail.getData();
-                if(!hasPrevious()) { return null; }
-                currentTail = currentTail.prev;
-                return tmp;
+                if(hasPrevious()) {
+                    T tmp = currentTail.getData();
+                    currentTail = currentTail.prev;
+                    return tmp;}
+                throw new NoSuchElementException();
             }
 
             @Override
-            public int nextIndex() {return indexPre = indexPre+1;}
+            public int nextIndex() {
+                if(!hasNext()) return indexPre + 1;
+                return indexPre = indexPre+1;}
 
             @Override
-            public int previousIndex() {return indexPost = indexPost-1;}
+            public int previousIndex() {
+                if(!hasPrevious()) return indexPost - 1;
+                return indexPost = indexPost-1;}
 
             @Override
             public void remove() {throw new RuntimeException();}
