@@ -1,5 +1,6 @@
 package PartA;
 
+
 /**
  * Created by Shlomi Alon on 19/12/2016.
  */
@@ -10,15 +11,13 @@ public class Triangle implements Drawable{
     private Point p3;
 
     public Triangle(Point p1, Point p2, Point p3) {
-        this.p1 = p1;
-        this.p2 = p2;
-        this.p3 = p3;
+        this.p1 = new Point(p1);
+        this.p2 = new Point(p2);
+        this.p3 = new Point(p3);
     }
 
     public Triangle(Triangle t){
-        this.p1 = t.p1;
-        this.p2 = t.p2;
-        this.p3 = t.p3;
+    	this(t.p1,t.p2,t.p3);
     }
 
     @Override
@@ -33,7 +32,7 @@ public class Triangle implements Drawable{
             Triangle t2 = new Triangle(p1, p, p3);
             Triangle t3 = new Triangle(p, p2, p3);
             double sumTs = t1.area() + t2.area() + t3.area();
-            if (sumTs == area()) {
+            if (Math.abs(this.area()-sumTs)<=0.001) {
                 return true;
             }
         }
@@ -45,8 +44,8 @@ public class Triangle implements Drawable{
     }
 
     public double area() {
-//        double D = perimeter() / 2;
-//        return Math.sqrt((D * (D - p1.distance(p2)) * (D - p2.distance(p3)) * (D - p1.distance(p3))));
+       //double D = perimeter() / 2;
+       //return Math.sqrt((D * (D - p1.distance(p2)) * (D - p2.distance(p3)) * (D - p1.distance(p3))));
         return Math.abs((p1.get_x()*(p2.get_y()-p3.get_y()) + p2.get_x()*(p3.get_y()-p1.get_y())+ p3.get_x()*(p1.get_y()-p2.get_y()))/2.0);
 
     }
