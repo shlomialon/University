@@ -27,15 +27,15 @@ import java.awt.event.*;
   	 g.setColor(Color.BLACK);
   	  for(int i=0;i<_draws.R_size();i++) {
   	  	PartA.Rectangle r = _draws.R_at(i);
-  	  	PartA.Point p1 = r.p1();
-		  PartA.Point p2 = r.p2();
+  	  	Point p1 = r.p1();
+		  Point p2 = r.p2();
 		  g.drawRect((int)p1.get_x(), (int)p1.get_y(), (int)r.dx(), (int)r.dy());
   	  }
   	  for(int i=0;i<_draws.T_size();i++) {	
 	  	Triangle t = _draws.T_at(i);
-	  	PartA.Point p1 = t.p1();
-		  PartA.Point p2 = t.p2();
-		  PartA.Point p3 = t.p3();
+	  	Point p1 = t.p1();
+		  Point p2 = t.p2();
+		  Point p3 = t.p3();
 		  int[] xx = new int[3], yy = new int[3];
 	  	xx[0] = (int)p1.get_x(); xx[1] = (int)p2.get_x(); xx[2] = (int)p3.get_x();
 	  	yy[0] = (int)p1.get_y(); yy[1] = (int)p2.get_y(); yy[2] = (int)p3.get_y();

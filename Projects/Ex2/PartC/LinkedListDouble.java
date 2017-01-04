@@ -51,27 +51,51 @@ public class LinkedListDouble<T> {
 
     public T remove(T item) {
         Node<T> current = head;
-        while (!isEmpty()) {
-            current = current.next;
+        if(current.getData().equals(item)) {
+            head = null;
+            tail = null;
+            size--;
+            return current.getData();
+        }
+        while (!isEmpty() && current != tail) {
             if (current.getData().equals(item)) {
                 current.prev.next = current.next;
                 current.next.prev = current.prev;
                 size--;
-                break;
+                return current.getData();
             }
+            current = current.next;
         }
-        return current.getData();
+        if (current == tail && current.getData() != item) {
+            return null;
+        } else if (current == tail && current.getData().equals(item)) {
+            current.next = null;
+            current.prev = tail.prev;
+            tail = tail.prev;
+            size--;
+            return current.getData();
+        }
+        return null;
     }
+
+
+
 
     @Override
     public String toString() {
         String ans = "";
         Node<T> current = head;
-        while (current != null && current != tail) {
-            ans += current.getData() + " --> ";
-            current = current.getNext();
-        }
-        return ans + tail.getData();
+            if (size() > 0) {
+                while (current != null && current != tail) {
+                    ans += current.getData() + " --> ";
+                    current = current.getNext();
+                }
+                if(tail == null)
+                    return ans;
+                return ans + tail.getData();
+            }else {
+                return "the list is empty";
+            }
     }
 
      public ListIterator<T> listIterator(){
