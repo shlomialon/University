@@ -24,7 +24,7 @@ import java.awt.event.*;
   public void add(PartA.Rectangle r) {_draws.add(r);}
   
   public void paint(Graphics g) {
-  	 g.setColor(Color.BLACK);
+  	 g.setColor(Color.PINK);
   	  for(int i=0;i<_draws.R_size();i++) {
   	  	PartA.Rectangle r = _draws.R_at(i);
   	  	Point p1 = r.p1();

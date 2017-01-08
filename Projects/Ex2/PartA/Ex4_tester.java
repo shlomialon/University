@@ -4,6 +4,7 @@ public class Ex4_tester {
 	public static void main(String[] a) {
 		checkSignature();
 		checkLogic();
+
 	}
 /**
  * this function uses some very simple tests and GUI to check some parts of Ex2a logic
@@ -19,6 +20,10 @@ public class Ex4_tester {
 		
 		Const.show(sc1);
 		Const.show(sc2);
+		System.out.println("size1: " + sc1.size());
+		System.out.println("size2: " + sc2.size());
+		sc1.minMaxPerimeter(0);
+		sc2.minMaxPerimeter(0);
 	}
 	
 /**	 this function does not follow any logic part of the code

@@ -28,11 +28,8 @@ interface  Gamma extends Alpha{
     }
 }
 
-// solution 1
+// //solution 1
 //class  Delta implements Betta, Gamma{
-//
-//
-//
 //    public static void main(String[] args) {
 //        Delta obj  = new Delta();
 //        obj.methodA();
@@ -48,26 +45,22 @@ interface  Gamma extends Alpha{
 
 //// solution 2
 //class  Delta implements Betta, Gamma{
-//
 //    public static void main(String[] args) {
 //        Delta obj  = new Delta();
 //        obj.methodA();
 //    }
-//
 //    @Override
 //    public int methodA() {
 //        return Betta.super.methodA();
 //    }
 //}
 
-// solution 3
+ //solution 3
 //class  Delta implements Betta, Gamma{
-//
 //    public static void main(String[] args) {
 //        Delta obj  = new Delta();
 //        obj.methodA();
 //    }
-//
 //    @Override
 //    public int methodA() {
 //        return Gamma.super.methodA();

@@ -142,5 +142,64 @@ class ShapeContainer {
             }
         }
     }
+
+
+    public void minMaxPerimeter(int num){
+        double max=-1;
+        double min=-1;
+        int comparisons=0;
+
+        if(drawables[0]!=null && drawables[1]!=null){
+            max=drawables[0].perimeter();
+            min=drawables[1].perimeter();
+            comparisons++;
+        }
+        if(drawables[1].perimeter()>drawables[0].perimeter())
+        {
+            max=drawables[1].perimeter();
+            min=drawables[0].perimeter();
+        }
+        for (int i = 2;(( i < this.drawables.length-1)&&(drawables[i]!=null&&drawables[i+1]!=null)); i=i+2) {
+            comparisons++;
+            if(drawables[i].perimeter()>drawables[i+1].perimeter())
+            {
+                comparisons=comparisons+2;
+                if(drawables[i].perimeter()>max){
+                    max=drawables[i].perimeter();
+                }
+                if(drawables[i+1].perimeter()<min){
+                    min=drawables[i+1].perimeter();
+                }
+
+            }
+            else
+            {
+                comparisons=comparisons+2;
+                if(drawables[i+1].perimeter()>max){
+                    max=drawables[i+1].perimeter();
+                }
+                if(drawables[i].perimeter()<min){
+                    min=drawables[i].perimeter();
+                }
+            }
+        }
+        //if number of elements is odd, we check the last element
+        if(this.drawables.length%2!=0 && drawables[drawables.length-1]!=null) //odd
+        {
+            comparisons++;
+            if(drawables[this.drawables.length-1].perimeter()>max)
+                max=drawables[this.drawables.length-1].perimeter();
+            else
+            {
+                if(drawables[this.drawables.length-1].perimeter()<min)
+                    min=drawables[this.drawables.length-1].perimeter();
+                comparisons++;
+            }
+        }
+        System.out.println("number of comparision: " + comparisons);
+        System.out.println("max perimeter: " + max);
+        System.out.println("min perimeter: " + min);
+    }
+
 }
 
