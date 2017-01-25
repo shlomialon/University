@@ -25,7 +25,9 @@ public class A_2007 {
 	}
 
 	static void copyArr(int[][] mat, int index) {
-		System.arraycopy(mat[index - 1], 0, mat[index], 0, index);
+		for (int i = 0; i < index; i++) {
+		mat[index][i] = mat[index-1][i];
+	}
 	}
 
 	public static int binarySerch(int mat[][] ,int value,int len){

@@ -57,6 +57,39 @@ public class B_2010 {
 		
 		return ans;
 	}
+public static int coins(int mat[][]){
+    	int n = mat.length;
+    	int m = mat.length;
+    	int ans[][] = new int [n][m];
+    	ans[0][0] = mat[0][0];
+    	for (int i = 1; i < n; i++) {
+			ans[i][0] = ans[i-1][0] + mat[i][0];
+		}
+    	
+    	for (int i = 1; i < n; i++) {
+			for (int j = 1; j < i + 1; j++) {
+				ans[i][j] = Math.max(ans[i-1][j], ans[i-1][j-1]) + mat[i][j];
+			}
+		}
+    	
+    	int max = ans[n-1][0];
+    	for (int i = 1; i < m; i++) {
+			if(ans[n-1][i] > max)
+				max = ans[n-1][i];
+		}
+    	printMatrix(ans);
+    	return max;
+    }
+    
+	public static void printMatrix(int mat[][]){
+		for (int i = 0; i < mat.length; i++) {
+			for (int j = 0; j < mat[0].length; j++) {
+				System.out.print(mat[i][j] + " ");
+			}
+			System.out.println();
+		}
+		System.out.println();
+	}
 
 	public static void main(String[] args) {
 //		int[][] mat = {
