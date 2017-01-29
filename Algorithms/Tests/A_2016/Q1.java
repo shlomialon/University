@@ -1,96 +1,101 @@
+package A_2016;
 
 public class Q1 {
-	int[]x;
-	int a;
-	int Fbreak;
-	int numOfBreaks;
-	int n;
-	// was told I'm allowed to add my own variable.
-
-	public Q1(int[]x, int a){
-		// not copying array as it will cost me O(n), and i want the algorithem to be O(sqrt[n]).
-		
-		numOfBreaks=0;
-		
-		n= x.length;
-
-		int k = numberOfChecking()-1;
-		int jump = k+1;
-		boolean broke = false;
-		while(n > k && !broke){
-			if(a < x[k]){ // first ball broke
-				numOfBreaks++;
-				broke = true;
-				break;
-			}
-			jump--;
-			k+= jump;
-		}
-		if(broke){ // we got out of loop because we broke the first ball
-			int floor = k - jump+1; // (k-jump) we know doesn't break. so start check from next floor
-
-			while(k > floor){// check until floor we know it broke at already.
-				if(a < x[floor]){// second ball broke. found floor
-					numOfBreaks++;
-					Fbreak = floor;//this is floor it broke at.
-					return;
-				}
-				floor++;
-			}
-			Fbreak = k;
-			return;
-		}
-		else{ // got out of loop because we passed the floors, but didn't find a breaking floor yet.
-			int floor = k - jump+1;// last floor we know exist, plus one so we check if will break from here on.
-			while(n > floor){
-				if(a < x[floor]){// first ball broke. found floor
-					numOfBreaks++;
-					Fbreak = floor;//this is floor it broke at.
-					return;
-				}
-				floor++;
-			}
-			Fbreak = -1; // if no floor broke the balls
-		}
+	private int numberOfBreaks;
+	private int numberOfChecking;
+	private int floorIndex;
+	
+	public Q1(int[]x, int a,int algo){
+		numberOfBreaks = 0;
+		numberOfChecking = 0;
+		floorIndex = -1;
+		if(algo == 1)ballsAlgo1(x,a);
+		if(algo == 2)ballsAlgo2(x,a);
 	}
 	
-	
+	private void ballsAlgo1(int[] x, int a) {
+		int n = x.length;
+		int k = divide(n);
+		int level = k-1;
+		boolean flag = true;
+		while(flag) {
+			if(level >= n) {
+				flag = false;
+				k = level - n+1;
+				level = n-1;
+			}
+			numberOfChecking++;
+			if(x[level] > a) {
+				numberOfBreaks++;
+				for (int i = level-k+1; i < level; i++) {
+					numberOfChecking++;
+					if(x[i] > a) {
+						numberOfBreaks++;
+						floorIndex = i;
+						return;
+					}
+				}
+				floorIndex = level;
+				return;
+			}
+			k--;
+			level += k;
+		}
+	}
+
+	private void ballsAlgo2(int[] x, int a) {
+		int n = x.length;
+		int k = divide(n);
+		int level = k-1;
+		boolean flag = true;
+		while(flag) {
+			if(level >= n) {
+				flag = false;
+				k = level - n+1;
+				level = n-1;
+			}
+			numberOfChecking++;
+			if(x[level] > a) {
+				numberOfBreaks++;
+				for (int i = level-k+1; i < level; i++) {
+					numberOfChecking++;
+					if(x[i] > a) {
+						numberOfBreaks++;
+						floorIndex = i;
+						return;
+					}
+				}
+				floorIndex = level;
+				return;
+			}
+			k = divide(n-level-1);
+			level += k;
+		}
+	}
+	private int divide(int n) {
+		return (int) Math.ceil((-1+Math.sqrt(1+8*n))/2);
+	}
+
 	public int numberOfBreaks(){
-		return numOfBreaks;
+		return numberOfBreaks;
 	}
+	
 	public int numberOfChecking(){
-		//		int k = 0;
-		//		int i = 0;
-		//		while(i<x.length){
-		//			k++;
-		//			i+=k;
-		//		}
-		int num = 0 ;
-		while(n > (num*(num+1))/2) num++;
-		return num;
+		return numberOfChecking;
 	}
-
-	// if no such floor will return -1;
+	
 	public int floorIndex(){
-		return Fbreak;
+		return floorIndex;
 	}
-
+	
 	public static void main(String[] args) {
-		
-		int x[] = new int[327];
+		int[] x = new int[10000];
 		for (int i = 0; i < x.length; i++) {
-			x[i] = i+1;
+			x[i] = i;
 		}
-		for (int i = 0; i < x.length; i++) {
-			Q1 balls = new Q1(x, i);
-			if( i != balls.floorIndex())System.out.println("ERROR");
-			
-		}
-		
-		int y[] = {1,3,7,7,7,8,14,18,30};
-		Q1 balls2 = new Q1(y, 18);
-		System.out.println(balls2.numOfBreaks);
-		System.out.println("Done checking");
+		Q1 q = new Q1(x,9000,1);
+		System.out.println(q.floorIndex + " " + q.numberOfBreaks + " " + q.numberOfChecking);
+		q = new Q1(x,9000,2);
+		System.out.println(q.floorIndex + " " + q.numberOfBreaks + " " + q.numberOfChecking);
 	}
-
 }
