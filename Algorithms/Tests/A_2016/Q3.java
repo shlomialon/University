@@ -18,22 +18,14 @@ public class Q3 {
 				deadArea.add(new Point(i, j));
 			}
 		}
-	
-		buildMatrix();
 	}      
 	public void buildMatrix(){
 		int n = mat.length, m = mat[0].length;
 		for (int i = 1; i < n; i++) {
-			if (deadArea.contains(new Point(i, 0))) {
-				mat[i][0].isDead = true;
-			}
 			mat[i][0].entry = mat[i - 1][0].entry + mat[i - 1][0].y;  
 			mat[i][0].numOfPaths = 1;
 		}
 		for (int j = 1; j < m; j++) {
-			if (deadArea.contains(new Point(0, j))) {
-				mat[0][j].isDead = true;
-			}
 			mat[0][j].entry = mat[0][j - 1].entry + mat[0][j - 1].x;
 			mat[0][j].numOfPaths = 1;
 		}
@@ -51,7 +43,6 @@ public class Q3 {
 				} else {
 					x = mat[i][j - 1].entry + mat[i][j - 1].x;
 				}
-				//mat[i][j].isDead = true;
 				mat[i][j].entry = x <= y ? x : y;
 				if (y < x) mat[i][j].numOfPaths = mat[i - 1][j].numOfPaths;
 				else if (y > x) mat[i][j].numOfPaths = mat[i][j - 1].numOfPaths;
@@ -133,26 +124,17 @@ public class Q3 {
 		}
 		System.out.println();
 	}
-	public static void printMatrixIsDead(Node mat[][]){
-		for (int i = 0; i < mat.length; i++) {
-			for (int j = 0; j < mat[0].length; j++) {
-				System.out.print(mat[i][j].isDead + " ");
-			}
-			System.out.println();
-		}
-		System.out.println();
-	}
+
 	public static void main(String[] args) {
 		Node mat[][] = initMatOfNodes();
 		Point p1 = new Point(1,1);
 		Point p2 = new Point(2,3);
 		Q3 test = new Q3(mat,p1,p2);
-		//test.buildMatrix();
+		test.buildMatrix();
 		printMatrixEntery(mat);
 		printMatrixX(mat);
 		printMatrixY(mat);
 		printMatrixCheap(mat);
-		printMatrixIsDead(mat);
 		System.out.println(test.numOfCheapestPaths());
 		System.out.println(test.cheapestPathPrice());
 		
