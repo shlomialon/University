@@ -233,7 +233,7 @@ public class MyCalculator {
                     System.out.println("Please type only positive numbers");
                     break;
                 }
-                DoubleUnaryOperator log = Math::log10;
+                DoubleUnaryOperator log = Math::log;
                 System.out.println("log10(" + number1 + ") = " + log.applyAsDouble(number1));
                 break;
             default:
