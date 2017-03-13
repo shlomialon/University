@@ -66,115 +66,56 @@ class Worker implements Runnable {
     }
 
     public static void main(String args[]) {
-        ArrayList<Worker> workers = new ArrayList<>(5);
+        ArrayList<Worker> workers = new ArrayList<>();
         workers.add(new Worker("MakeDough",15000));
         workers.add(new Worker("RollDough",8000));
         workers.add(new Worker("BakePizza",20000));
         workers.add(new Worker("MakeSauce",10000)); //lock
         workers.add(new Worker("AddSauce",3000));//lock
 
-        System.out.println("option: ");
-        for (int i = 0; i < workers.size(); i++) {
-            System.out.println(i+1 + ": " + workers.get(i).TaskName);
+        System.out.println("Menu: ");
+        for (int index = 0; index < workers.size(); index++) {
+            System.out.println(index+1 + ": " + workers.get(index).TaskName);
         }
 
-        Thread task;
-        int i=0;
-        int j=0;
-
-        while(i<=2 || j!=2) {
+        Thread thread;
+        int i = 0,j = 0;
+        while(i < 3 || j != 2) {
             System.out.println( '\n' + "Enter task: ");
             Scanner console = new Scanner(System.in);
             String name = console.nextLine();
 
-            if (name.equals("MakeSauce")) {
-                if (!workers.get(3).TaskName.equals("done")) {
-                    task = new Thread(workers.get(3), workers.get(3).TaskName);
-                    task.start();
-                    workers.get(3).TaskName = "done";
-                    j++;
-                } else {
-                    if (name.equals("AddSauce"))
-                        if (!workers.get(4).TaskName.equals("done")) {
-                            task = new Thread(workers.get(4), workers.get(4).TaskName);
-                            task.start();
-                            workers.get(4).TaskName = "done";
-                            j++;
-                        } else {
-                            if (name.equals(workers.get(i).TaskName))
-                                if (!workers.get(i).TaskName.equals("done")) {
-                                    if (name.equals("BakePizza") && j != 2) {
-                                        System.out.println("try again!");
-                                    } else {
-                                        task = new Thread(workers.get(i), workers.get(i).TaskName);
-                                        task.start();
-                                        try {
-                                            task.join();
-                                        } catch (InterruptedException e) {
-                                            e.printStackTrace();
-                                        }
-                                        workers.get(i).TaskName = "done";
-                                        i++;
-                                    }
-                                } else {
-                                    System.out.println("try again!");
-                                }
-                            else {
-                                System.out.println("try again!");
-                            }
-                        }
-                    else if (name.equals(workers.get(i).TaskName)) {
-                        if (!workers.get(i).TaskName.equals("done")) {
-                            if (name.equals("BakePizza") && j != 2) {
-                                System.out.println("try again!");
-                            } else {
-                                task = new Thread(workers.get(i), workers.get(i).TaskName);
-                                task.start();
-                                try {
-                                    task.join();
-                                } catch (InterruptedException e) {
-                                    e.printStackTrace();
-                                }
-                                workers.get(i).TaskName = "done";
-                                i++;
-                            }
-                        } else {
-                            System.out.println("try again!");
-                        }
-                    } else {
-                        System.out.println("try again!");
-                    }
+            if(name.equals(workers.get(i).TaskName) && !workers.get(i).TaskName.equals("done")){
+                if(name.equals("BakePizza") && j != 2){
+                    System.out.println("Error in the preparation stages, try again.");
                 }
-            } else if (name.equals("AddSauce") && !workers.get(4).TaskName.equals("done")) {
-                task = new Thread(workers.get(4), workers.get(4).TaskName);
-                task.start();
-                workers.get(4).TaskName = "done";
-                j++;
-            } else if (name.equals(workers.get(i).TaskName)) {
-                if (!workers.get(i).TaskName.equals("done")) {
-                    if (name.equals("BakePizza") && j != 2)
-                        System.out.println("try again!");
-                    else {
-                        task = new Thread(workers.get(i), workers.get(i).TaskName);
-                        task.start();
-                        try {
-                            task.join();
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        workers.get(i).TaskName = "done";
-                        i++;
+                else{
+                    thread = new Thread(workers.get(i),workers.get(i).TaskName);
+                    thread.start();
+                    try {
+                        thread.join();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
                     }
-                } else {
-                    System.out.println("try again!");
+                    workers.set(i, new Worker( "done",0));
+                    i++;
                 }
-            } else {
-                System.out.println("try again!");
             }
+            else if(name.equals("MakeSauce") && !workers.get(3).TaskName.equals("done")){
+                thread = new Thread(workers.get(3),workers.get(3).TaskName);
+                thread.start();
+                workers.set(3, new Worker( "done",0));
+                j++;
+            }
+            else if(name.equals("AddSauce") && !workers.get(4).TaskName.equals("done")){
+                thread = new Thread(workers.get(4),workers.get(4).TaskName);
+                thread.start();
+                workers.set(3, new Worker( "done",0));
+                j++;
+            }
+            else
+                System.out.println("We made this step, please try again.");
         }
-        System.out.println();
-        System.out.println("the pizza is ready! Bon Appetit!");
+        System.out.println('\n' + "The pizza is ready!");
     }
 }
-
-
