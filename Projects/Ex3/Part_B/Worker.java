@@ -56,6 +56,27 @@ class Worker implements Runnable {
         }
     }
     private void Lock2() throws InterruptedException {
+        synchronized (Lock1) {
+            System.out.println("AddSauce: Holding AddSauce...");
+            Thread.sleep(3000);
+            synchronized (Lock2) {
+                System.out.println("AddSauce: Holding lock MakeSauce...");
+            }
+        }
+    }
+
+    //This part will cause the deadlock
+    /**
+    private void Lock1() throws InterruptedException {
+        synchronized (Lock1) {
+            System.out.println("MakeSauce: Holding MakeSauce...");
+            Thread.sleep(1000);
+            synchronized (Lock2) {
+                System.out.println("MakeSauce: Holding lock AddSauce...");
+            }
+        }
+    }
+    private void Lock2() throws InterruptedException {
         synchronized (Lock2) {
             System.out.println("AddSauce: Holding AddSauce...");
             Thread.sleep(3000);
@@ -64,7 +85,7 @@ class Worker implements Runnable {
             }
         }
     }
-
+    **/
     public static void main(String args[]) {
         ArrayList<Worker> workers = new ArrayList<>();
         workers.add(new Worker("MakeDough",15000));
@@ -115,6 +136,7 @@ class Worker implements Runnable {
             }
             else
                 System.out.println("We made this step, please try again.");
+
         }
         System.out.println('\n' + "The pizza is ready!");
     }

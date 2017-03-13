@@ -139,7 +139,7 @@ public class Ex13 {
     public static void main(String[] args) {
         String expression = "((4*((4%3)+2))*3)";
         System.out.println("evalExpr2 : " + evalExpr2(expression));
-        String[] exp = {"0", "(1+4)", "(((2+3)*3)+(3-1))", "(1+((2+3)*(4*5)))", "((1+5)%4)"};
+        String[] exp = {"0", "(9-6)*(3+3)", "(((2+3)*3)+(3-1))", "(1+((2+3)*(4*5)))", "((1+5)%4)"};
 	String[] errExp = {"1+4)", "((2+3)*3)+(3-1)))", "(1+(2)"};
 	for(int i = 0; i < exp.length; i++){
             System.out.println(exp[i] + " = " + evalExpr2(exp[i]));
