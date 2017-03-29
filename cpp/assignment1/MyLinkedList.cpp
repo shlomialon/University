@@ -7,7 +7,7 @@ MyLinkedList::MyLinkedList(){
     size = 0;
 }
 
-MyLinkedList::MyLinkedList(string *strArr, double *doubleArr, size_t len){
+MyLinkedList::MyLinkedList(string* strArr, double* doubleArr, size_t len){
     for (int i = 0; i < len; i++) {
       add(strArr[i],doubleArr[i]);
     }
