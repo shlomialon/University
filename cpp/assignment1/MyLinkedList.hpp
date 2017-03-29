@@ -13,10 +13,10 @@ class MyLinkedList{
         MyLinkedList();
         MyLinkedList(string* arr1,double* arr2,size_t size);
         MyLinkedList(MyLinkedList* list);
-        void destructor();
+        ~distructor();
         void add(string key,double data);
         void remove(string s);
-        bool isInList(string key,double d);
+        bool isInList(string key,double data);
         double sumList(MyLinkedList list);
         int sizelist();
         string toString();
