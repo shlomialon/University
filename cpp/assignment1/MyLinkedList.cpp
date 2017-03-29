@@ -66,7 +66,7 @@ double MyLinkedList::sumList(){
 bool MyLinkedList::isInList(string key,double data){
     Node* curr = head;
     while(curr != NULL){
-        if(key == curr->getKey() && data == curr->getData()){
+        if((key == curr->getKey()) && (data == curr->getData())){
             return true;
         }else{
          curr = curr->next;   
