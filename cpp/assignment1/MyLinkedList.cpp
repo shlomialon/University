@@ -7,7 +7,7 @@ MyLinkedList::MyLinkedList(){
     size = 0;
 }
 
-MyLinkedList::MyLinkedList(string *strArr, double *doubleArr, size_t len){
+MyLinkedList::MyLinkedList(std::string *strArr, double *doubleArr, size_t len){
     for (int i = 0; i < len; i++) {
       add(strArr[i],doubleArr[i]);
     }
@@ -18,7 +18,8 @@ MyLinkedList::MyLinkedList(MyLinkedList* list){
     list->tail = tail;
 }
 
-MyLinkedList::~distructor(){
+MyLinkedList::~MyLinkedList(){
+    Node* temp;
 while (head != NULL){
     temp = head->next;
     delete head;
@@ -26,7 +27,7 @@ while (head != NULL){
   }
 }
 
-void MyLinkedList:: add(string key, double data){
+void MyLinkedList:: add(std::string key, double data){
     Node* newNode = new Node(key,data);
     if(head == NULL){
         head = newNode;
@@ -41,7 +42,7 @@ void MyLinkedList:: add(string key, double data){
     }
 }
 
-void MyLinkedList::remove(string s){
+void MyLinkedList::remove(std::string s){
      Node* curr = head;
     while(curr != NULL){
         if(curr->getKey() == s){
@@ -63,7 +64,7 @@ double MyLinkedList::sumList(){
     return sumListAns;
 }
 
-bool MyLinkedList::isInList(string key,double data){
+bool MyLinkedList::isInList(std::string key,double data){
     Node* curr = head;
     while(curr != NULL){
         if(key == curr->getKey() && data == curr->getData()){
@@ -76,14 +77,14 @@ bool MyLinkedList::isInList(string key,double data){
 }
 
 int MyLinkedList::sizelist(){
-    return this->size
+    return this->size;
 }
 
- string MyLinkedList::toString(){
-        string ans;
+ std::string MyLinkedList::toString(){
+        std::string ans;
         Node* curr = head;
         while(curr->next != NULL){
-            ans +=  curr->getKey() + "," + std::to_string(curr->getData()) + " -> " ;
+            //ans +=  curr->getKey() + "," + std::to_string(curr->getData()) + " -> " ;
             curr = curr->next;
         }
         ans += curr->getKey();

@@ -1,7 +1,10 @@
+
 #include <iostream>
 using namespace std;
 #include "MyLinkedList.cpp"
 #include <sstream>
+#include <string>
+
 
 int main(){
     Node* n = new Node("shlomi",23.0);

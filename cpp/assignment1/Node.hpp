@@ -1,7 +1,10 @@
-
+#pragma once
+#include <string>
+#include<iostream>
+using namespace std;
 class Node{
     private:
-            string str;
+            std::string str;
             double d;
     public:
             Node* next;
@@ -14,18 +17,18 @@ class Node{
                 this->prev = NULL;
             }
             
-            Node(string str,double d){
+            Node(std::string str,double d){
                 this->str = str;
                 this->d = d;
             }
             double getData(){
                 return d;
             }
-            string getKey(){
+            std::string getKey(){
                 return str;
             }
             void toString(){
-                std::cout << this->str << " " << this->d << std::endl;
+               cout<< this->str << " " << this->d;
             }
 };
 
