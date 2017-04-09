@@ -1,3 +1,6 @@
+import java.lang.reflect.Array;
+import java.util.Arrays;
+
 /**
  * Created by Shlomi Alon on 30/03/2017.
  */
@@ -41,17 +44,20 @@ public class FloydWarshall {
         }
     }
 
-    public static int[] func(int mat[][]){
+    public static int[] numberOfTheConnectedComponents(int mat[][]){
         int [] ansArr = new int [mat.length];
         int n = mat.length;
-        int nunComp = 0;int i;
+        int nunComp = 0;
+        int i;
         for (i = 0; i < n; i++) {
             if(ansArr[i] == 0){
                 nunComp++;
                 ansArr[i] = nunComp;
             }
             for (int j = 0; j < n; j++) {
-                //if(ansArr[j]==0 && mat[i][j])
+                if(ansArr[j] == 0 && mat[i][j] != 0){
+                    ansArr[j] = nunComp;
+                }
             }
         }
         return ansArr;
@@ -59,7 +65,9 @@ public class FloydWarshall {
 
 
     public static void main(String[] args) {
-        boolean mat [][] = {{false,true,true,false},{true,false,false,true},{true,false,false,true},{false,true,true,false}};
+
+    //Test
+     /**   boolean mat [][] = {{false,true,true,false},{true,false,false,true},{true,false,false,true},{false,true,true,false}};
         int size = mat.length;
         System.out.println(FWAlgorithm(size,mat));
         getPathMath(size,mat);
@@ -78,5 +86,8 @@ public class FloydWarshall {
                 {0,0,0,0,0,0,0,0,0,0,0,1,0},
                 {0,0,0,0,0,0,0,0,0,0,0,0,1}
     };
+       int arr[] = numberOfTheConnectedComponents(matrix);
+        System.out.println(Arrays.toString(arr));
+      **/
     }
 }
