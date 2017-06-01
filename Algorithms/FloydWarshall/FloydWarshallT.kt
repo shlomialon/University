@@ -49,6 +49,23 @@ fun printBoolPath(pathMat: Array<Array<String>>, mat: Array<Array<Boolean>>) {
     }
 }
 
+fun NumberOfTheConnectedComponents(graph: Array<Array<Int>>) {
+    val connectComp: Array<Int> = emptyArray()
+    val size = graph.size
+    var numComp = 0
+    for (i in 0..graph.size - 1) {
+        if (connectComp[i] == 0) {
+            numComp++
+            connectComp[i] = numComp
+        }
+        for (j in (i + 1)..graph.size - 1) {
+            if (connectComp[j] == 0 && graph[i][j]) {
+                connectComp[j] = numComp
+            }
+        }
+    }
+}
+
 fun printBooleanMat(mat: Array<Array<Boolean>>) {
     for (i in 0..mat.size-1) {
         for (j in 0..mat.size-1) {
