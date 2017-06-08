@@ -97,11 +97,48 @@ public class MaxSumSubMatrix {
         return max;
     }
 
+//O(n^3)
+    public static void subMax(int mat[][])
+    {
+    int help[][] = new int [mat.length][mat[0].length+1];
+        for (int i = 0; i < help.length; i++) {
+            for (int j = 1; j < help[0].length; j++) {
+                if(i == 0)
+                    help[i][j] = 0;
+                help[i][j] = help[i][j-1] + mat[i][j-1];
+            }
+        }
+        printMatrix(mat);
+        printMatrix(help);
+        int max = Integer.MIN_VALUE,sum = 0, rows = help.length,col = help[0].length;
+        for (int eb = 0; eb < col; eb++) {
+            for (int ej = eb + 1; ej < col; ej++) {
+                sum = 0;
+                for (int i = 0; i < ej; i++) {
+                    int value = help[i][ej] - help[i][eb];
+                    sum += value;
+                    if(sum < 0)
+                        sum = 0;
+                    else
+                        if(sum > max)
+                            max = sum;
+                }
+            }
+        }
+        System.out.println(max);
+    }
 
-
+    public static void printMatrix(int matrix[][]){
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[0].length; j++) {
+                System.out.print(matrix[i][j] + "\t");
+            }
+            System.out.println();
+        }
+        System.out.println();
+    }
 
     public static void main(String[] args) {
-//~~~~~~~~~~~~~~~~~~TEST~~~~~~~~~~~~~~~~~~
 //        int mat1[][] = {{2,10,8,3},
 //                {-8,14,-1,4},
 //                {-6,-1,8,-2},
@@ -127,12 +164,14 @@ public class MaxSumSubMatrix {
 //                {3,2,8,1,6},
 //                {-5,2,-20,3,1}};	//sumMax=20
 //        System.out.println("Max sub matrix: " + maxSubMatrix(mat5));
+//
+//        int mat6[][] = {{2,10,8,3},
+//                {-8,14,-1,4},
+//                {-6,-1,8,-2},
+//                {1,8,7,3},
+//                {8,2,-10,-8}};		//sumMax=61
+//        subMax(mat6);
 
-//         int mat6[][] = {{2,10,8,3},
-//                 {-8,14,-1,4},
-//                 {-6,-1,8,-2},
-//                 {1,8,7,3},
-//                 {8,2,-10,-8}};		//sumMax=61
-//         System.out.println("Max sub matrix: " + matrixSuperBestON4(mat6));
-//     }
+
+    }
 }
