@@ -138,6 +138,69 @@ public class MaxSumSubMatrix {
         System.out.println();
     }
 
+     //0(n^3)
+    public static int maxSubMatrixBest(int[][] mat) {
+        int finalL = -1,finalR = -1,finalU = -1,finalD = -1;
+        int maxSum = Integer.MIN_VALUE;
+        for (int i = 0; i < mat[0].length; i++) {
+            int best [] = new int[mat.length];
+            for (int j = i; j < mat[0].length; j++) {
+                for (int k = 0; k < mat.length; k++) {
+                    best[k] += mat[k][j];
+                }
+                int currBestSum[] = kadane(best);
+                if (currBestSum[0] > maxSum) {
+                    maxSum = currBestSum[0];
+                    finalU = currBestSum[1];
+                    finalD = currBestSum[2];
+                    finalR = j;
+                    finalL = i;
+                }
+            }
+        }
+        System.out.println("max: " + maxSum + "\t" + "up: " + finalU+ "\t" + "dwon: " + finalD+ "\t" + "left: " + finalL+ "\t" + "right: " + finalR+ "\t");
+        return maxSum;
+    }
+
+    /**
+     * To find maxSum in 1d array
+     *
+     * return {maxSum, left, right}
+     */
+    public static int[] kadane(int[] a) {
+        //result[0] == maxSum, result[1] == start, result[2] == end;
+        int[] result = new int[]{Integer.MIN_VALUE, 0, -1};
+        int currentSum = 0;
+        int localStart = 0;
+
+        for (int i = 0; i < a.length; i++) {
+            currentSum += a[i];
+            if (currentSum < 0) {
+                currentSum = 0;
+                localStart = i + 1;
+            } else if (currentSum > result[0]) {
+                result[0] = currentSum;
+                result[1] = localStart;
+                result[2] = i;
+            }
+        }
+
+        //all numbers in a are negative
+        if (result[2] == -1) {
+            result[0] = 0;
+            for (int i = 0; i < a.length; i++) {
+                if (a[i] > result[0]) {
+                    result[0] = a[i];
+                    result[1] = i;
+                    result[2] = i;
+                }
+            }
+        }
+
+        return result;
+    }
+
+    
     public static void main(String[] args) {
 //        int mat1[][] = {{2,10,8,3},
 //                {-8,14,-1,4},
